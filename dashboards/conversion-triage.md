@@ -18,14 +18,14 @@ Pinned in the Slingshot Biosciences PostHog project. Each tile maps to one or mo
 
 ## Active alerts
 
-Both deliver via email to `josh.haydon@slingshotbio.com`. Edit recipients in the PostHog UI under each alert.
+Each alert delivers via email to `josh.haydon@slingshotbio.com` **and** posts to Slack `#website-visitors` (channel id `C09P9UDAC15`, workspace `Slingshot Bio`, integration id `168970`) through a PostHog internal-destination CDP function.
 
-| Alert | Insight | Trigger | Cadence |
-|---|---|---|---|
-| **No purchases in 24h** (id `019de5f3-bcc2-…`) | [Purchases per day](https://us.posthog.com/project/264212/insights/wAjBISEv) | series 0 (Purchases) drops below 1 | daily |
-| **Exception spike (z-score, 14d window)** (id `019de5f4-0290-…`) | [`$exception` count](https://us.posthog.com/project/264212/insights/S9iQlCZZ) | z-score detector, threshold 0.95, 14-day rolling window on series 0 (Exceptions) | daily |
+| Alert | Insight | Trigger | Cadence | Slack destination |
+|---|---|---|---|---|
+| **No purchases in 24h** (id `019de5f3-bcc2-…`) | [Purchases per day](https://us.posthog.com/project/264212/insights/wAjBISEv) | series 0 (Purchases) drops below 1 | daily | CDP fn `019de5fa-ca70-…` |
+| **Exception spike (z-score, 14d window)** (id `019de5f4-0290-…`) | [`$exception` count](https://us.posthog.com/project/264212/insights/S9iQlCZZ) | z-score detector, threshold 0.95, 14-day rolling window on series 0 (Exceptions) | daily | CDP fn `019de5fa-d48a-…` |
 
-To add Slack delivery later, follow PostHog's CDP-functions recipe (see `cdp-functions-create` docs) — needs a Slack integration channel id.
+> **One-time setup needed in Slack:** invite the PostHog bot to `#website-visitors` with `/invite @PostHog`. Until that's done, the message-post will fail with `not_in_channel`. The PostHog UI surfaces these errors under Pipeline → Internal destinations.
 
 ## Refreshing
 
